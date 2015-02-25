@@ -28,6 +28,13 @@ namespace crm.Controllers
             return View();
         }
 
+        public ActionResult MyProfile()
+        {
+            ViewBag.Message = "My Profile page.";
+
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(Login model)
         {
