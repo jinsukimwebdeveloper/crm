@@ -6,6 +6,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
     <nav class="container navbar navbar-default">
@@ -52,7 +55,6 @@
                                     <i class="fa fa-user"></i>&nbsp;&nbsp;Jinsu Kim <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">My Profile</a></li>
                                     <li><a href="#">Logout</a></li>
                                 </ul>
                             </li>
@@ -70,7 +72,6 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">My Profile</a></li>
-                                    <li><a href="#">Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -152,10 +153,5 @@
             <p>&copy;@DateTime.Now.Year - <i class="fa fa-group"></i>&nbsp;@Resources.Resources.CRM4Everyone</p>
         </footer>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-
 </body>
 </html>

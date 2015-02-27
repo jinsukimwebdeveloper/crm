@@ -1,6 +1,22 @@
-﻿@{
+﻿@model crm.ViewModel.Home.MyProfileViewModel
+
+@{
     ViewBag.Title = "My Profile";
 }
+
+<!-- datatable -->
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script><!-- datatable -->
+
+<script>
+    $(document).ready(function () {
+        var loginHistory = @Html.Raw(Json.Encode(Model.LoginHistoryViewModel));
+        $('#example').dataTable({
+            "ajax":loginHistory
+        });
+        alert("hi");
+    });
+</script>
 
 <ol class="breadcrumb">
     <li><i class="fa fa-home"></i><a href="#">&nbsp;Home</a></li>
@@ -24,16 +40,9 @@
 </div>
 
 <div class="row">
+    <!-- Contact -->
     <div class="col-md-4">
         <h3><span class="fa fa-user" aria-hidden="true"></span>&nbsp;&nbsp;Contact</h3>
-    </div>
-    <div class="col-md-4 col-md-offset-1">
-        <h3><span class="fa fa-history" aria-hidden="true"></span>&nbsp;&nbsp;Login History</h3>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
         <table class="table table-striped">
             <tbody>
                 <tr>
@@ -53,6 +62,10 @@
                     <td>Company name</td>
                 </tr>
                 <tr>
+                    <td class="text-right"><strong>Manager</strong></td>
+                    <td>Saravana Dubaku</td>
+                </tr>
+                <tr>
                     <td class="text-right"><strong>Email</strong></td>
                     <td>someone@company.com</td>
                 </tr>
@@ -66,50 +79,45 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div class="col-md-4 col-md-offset-1">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>IP address</th>
-                    <th>Browser</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                    <td>mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>fat</td>
-                    <td>mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>twitter</td>
-                    <td>mdo</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-2">
         <button type="button" class="btn btn-default">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;Edit
         </button>
-    </div>
+    </div><!-- Contact -->
+    <!-- Login History-->
+    <div class="col-md-6 col-md-offset-1">
+        <h3><span class="fa fa-history" aria-hidden="true"></span>&nbsp;&nbsp;Login History</h3>
+        @*<table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>IP address</th>
+                        <th>Browser</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>2014.11.12</td>
+                        <td>09:11</td>
+                        <td>190.0.0.1</td>
+                        <td>Chrome</td>
+                        <td>OK</td>
+                    </tr>
+                </tbody>
+            </table>*@
+        <table id="example" class="display" width="100%">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>IP Address</th>
+                    <th>Browser</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+        </table>
+    </div><!-- Login History-->
 </div>
