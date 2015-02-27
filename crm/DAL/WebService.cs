@@ -12,7 +12,7 @@ namespace crm.DAL
 {
     public class WebService
     {
-        public List<LoginHistoryData> GetLoginHistory(string userID)
+        public List<LoginHistoryData> GetLoginHistory(int? userID)
         {
             List<LoginHistoryData> data;
 
