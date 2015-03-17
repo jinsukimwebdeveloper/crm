@@ -1,40 +1,29 @@
-﻿<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery.dataTables.min.js"></script>
+﻿@{
+    ViewBag.Title = "MyProfile";
+}
 
+@model crm.ViewModel.Home.LoginHistoryViewModel
 <script>
     $(document).ready(function () {
-        $('#loginHistory').dataTable({
-            "serverSide": true,
-            "processing": true,
-            "ordering": false,
-            "paing": false,
-            "searching": false,
-            "pageLength": 10,
-            "lengthMenu": [10],
-            "ajax": '@Url.Action("LoginHistoryAjaxHandler", "Home")',
-            "columns": [
-                { "data": "Date" },
-                { "data": "Time" },
-                { "data": "IPAddress" },
-                { "data": "Browser" },
-                { "data": "Status" }
-            ]
-        });
-
-        var table = $('#loginHistory').DataTable();
-
-        $('#loginHistory').on('page.dt', function () {
-            var info = table.page.info();
-            var msg = info.page + ' of ' + info.pages;
-            alert(msg);
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: '@Url.Action("GetLoginHistory", "Home")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, val) {
+                    var row = "<tr><td>" + val.Date + "</td><td>" + val.Time + "</td><td>" +
+                        val.IPAddress + "</td><td>" + val.Browser + "</td><td>" + val.Status + "</td></tr>";
+                    $('#loginHistory > tbody').append(row);
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed to retrieve books.');
+            }
         });
     });
 </script>
-
-<ol class="breadcrumb">
-    <li><i class="fa fa-home"></i><a href="#">&nbsp;Home</a></li>
-    <li class="active">My Profile</li>
-</ol>
 
 <div class="row">
     <!-- Image -->
@@ -95,7 +84,7 @@
     <!-- Login History-->
     <div class="col-md-8">
         <h3><span class="fa fa-history" aria-hidden="true"></span>&nbsp;&nbsp;Login History</h3>
-        <table id="loginHistory" class="display" cellspacing="0" width="100%">
+        <table id="loginHistory" class="table table-hover">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -105,6 +94,7 @@
                     <th>Status</th>
                 </tr>
             </thead>
+            <tbody></tbody>
         </table>
     </div><!-- Login History-->
 </div>

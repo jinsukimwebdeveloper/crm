@@ -38,32 +38,24 @@ namespace crm.Controllers
             return View();
         }
 
-        public JsonResult LoginHistoryAjaxHandler()
+        public JsonResult GetLoginHistory()
         {
             // Retrieve the model from DAL
             int userID = 0;
-            List<LoginHistoryData> data = webservice.GetLoginHistory(userID);
-
-            // Create view model
-            List<LoginHistory> viewModel = new List<LoginHistory>();
-            foreach (LoginHistoryData item in data)
+            List<LoginHistoryModel> loginHistoryData = webservice.GetLoginHistory(userID);
+            List<LoginHistoryViewModel> result = new List<LoginHistoryViewModel>();
+            foreach (LoginHistoryModel model in loginHistoryData)
             {
-                LoginHistory info = new LoginHistory();
-                info.Date = item.LoginDateTime;
-                info.Time = item.LoginDateTime;
-                info.IPAddress = item.IPAddress;
-                info.Browser = item.Browser;
-                info.Status = item.Status;
-                viewModel.Add(info);
+                LoginHistoryViewModel viewModel = new LoginHistoryViewModel();
+                viewModel.Date = model.LoginDateTime;
+                viewModel.Time = model.LoginDateTime;
+                viewModel.Browser = model.Browser;
+                viewModel.IPAddress = model.IPAddress;
+                viewModel.Status = model.Status;
+                result.Add(viewModel);
             }
 
-            var result = new JsonResult
-            {
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = new { draw = 1, recordsTotal = 12, recordsFiltered =12, data = viewModel }
-            };
-
-            return result;
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

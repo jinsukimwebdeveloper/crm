@@ -5,7 +5,7 @@ using System.Web;
 
 namespace crm.DAL.DTO
 {
-    public class LoginHistoryData
+    public class LoginHistoryModel
     {
         public string LoginDateTime { get; set; }
         public string IPAddress { get; set; }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace crm.ViewModel.Home
 {
-    public class MyProfile
+    public class MyProfileViewModel
     {
         public string Name { get; set; }
         public string Title { get; set; }

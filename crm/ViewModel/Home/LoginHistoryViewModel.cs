@@ -5,7 +5,7 @@ using System.Web;
 
 namespace crm.ViewModel.Home
 {
-    public class LoginHistory
+    public class LoginHistoryViewModel
     {
         public string Date { get; set; }
         public string Time { get; set; }
